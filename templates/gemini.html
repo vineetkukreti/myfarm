@@ -1,0 +1,36 @@
+<!-- templates/chat.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div id="chat-header" class="chat-header" onclick="toggleChat()">
+            <h1>Chatbot</h1>
+        </div>
+        <div id="chat-body" class="chat-body">
+            <form id="chat-form" action="{{ url_for('chat') }}" method="post">
+                <label for="user_input">User Input:</label>
+                <input type="text" name="user_input" id="user_input" required>
+                <button type="submit">Send</button>
+            </form>
+
+            {% if user_input %}
+                <h2>Your Input:</h2>
+                <p>{{ user_input }}</p>
+            {% endif %}
+
+            {% if response %}
+                <h2>Chatbot's Response:</h2>
+                <p>{{ response }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<!-- Navbar Start -->
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Farming Prediction</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-4">Fish Farming Prediction</h1>
+
+        {% if not prediction %}
+        <form method="post" action="/predict_fish" class="mt-4">
+            <div class="form-group">
+                <label for="ph">pH:</label>
+                <input type="text" id="ph" name="ph" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="temperature">Temperature:</label>
+                <input type="text" id="temperature" name="temperature" required class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="turbidity">Turbidity:</label>
+                <input type="text" id="turbidity" name="turbidity" required class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+        {% else %}
+        <button onclick="location.href='/predict_fish'" type="button" class="btn btn-primary mt-4">Predict
+            Another</button>
+        <h2 class="mt-4">Prediction: {{ prediction }}</h2>
+        <div class="card mt-4">
+            <div class="card-body">
+              
+                {% if prediction in ['fish_karpio', 'fish_katla', 'fish_koi', 'fish_magur', 'fish_pangas', 'fish_prawn',
+                'fish_rui', 'fish_shrimp', 'fish_silverCup', 'fish_sing', 'fish_tilapia'] %}
+                {% set fish_name = prediction.replace('fish_', '') %}
+                <h3 class="card-title">{{ fish_name }}</h3>
+                <p>
+                    Information about {{ fish_name }}.
+                </p>
+                
+                <ul>
+                    {% if fish_name == 'karpio' %}
+                    The common carp, native to Europe and Asia, presents a unique opportunity in aquaculture. Despite
+                    being labeled an invasive species, its adaptability and diverse colors, seen in hybrids like the
+                    Ghost Carp, make it commercially valuable. There's potential for sustainable breeding and
+                    exploitation of its traits for economic benefits in the aquaculture industry
+                    {% elif fish_name == 'katla' %}
+                    Katla (Catla catla) is a freshwater fish species native to South Asia, particularly found in rivers
+                    and lakes of India, Bangladesh, and Pakistan. It's a significant and economically important fish in
+                    the region. Katla is known for its large size, rapid growth, and high market demand.
+
+                    This carp species is a popular choice in aquaculture due to its fast growth rate, adaptability to
+                    various environments, and tasty flesh. Katla fish is often a staple in South Asian cuisine, and its
+                    popularity contributes to both local consumption and export.
+                    {% elif fish_name == 'koi' %}
+                    Koi fish, the colorful jewels of water gardens! These ornamental varieties of the common carp
+                    (Cyprinus carpio) are cherished for their vibrant colors and striking patterns. Originating from
+                    Asia, particularly Japan, koi have become popular worldwide for their aesthetic appeal.
+
+                    Koi come in a dazzling array of colors like red, orange, yellow, blue, and white, and their patterns
+                    can range from speckles to elaborate designs. People often keep them in outdoor ponds or water
+                    gardens, appreciating not just their beauty but also the sense of tranquility they bring to the
+                    environment.
+
+                    Beyond their visual allure, koi have symbolic significance in various cultures, representing
+                    qualities like perseverance, strength, and good fortune. Keeping and caring for koi has become a
+                    dedicated hobby for many enthusiasts.
+
+                    {% elif fish_name == 'magur' %}
+                    Magur fish, or walking catfish, is a hardy and adaptable species ideal for aquaculture. It grows
+                    quickly, has a versatile diet, and is in demand in Asian markets. With proper management, magur fish
+                    farming can be profitable, but it requires careful attention to water quality and disease control.
+                    Research and compliance with local regulations are crucial for success.
+
+
+
+                    {% elif fish_name == 'pangas' %}
+
+                    Pangasius, often referred to as "pangas" or "swai," is a type of freshwater catfish commonly farmed
+                    in Vietnam and other Southeast Asian countries. It gained popularity for its mild taste, white
+                    flesh, and affordability. Pangasius farming has faced environmental and sustainability concerns,
+                    leading to debates about its ethical practices. As a consumer, it's essential to be aware of the
+                    source and farming methods when choosing pangasius products.
+
+                    {% elif fish_name == 'prawn' %}
+                    Prawns, a type of crustacean, are popular seafood known for their sweet and delicate flavor. They
+                    are widely consumed worldwide and can be found in various cuisines. Prawn farming, also known as
+                    prawn aquaculture, is practiced in many countries to meet the demand for this seafood. Successful
+                    prawn farming involves providing optimal conditions for growth, including water quality,
+                    temperature, and proper nutrition. Sustainable and well-managed prawn farming practices are
+                    essential to minimize environmental impact and ensure a steady supply of high-quality prawns for
+                    consumers.
+
+                    {% elif fish_name == 'rui' %}
+                    Rui, also known as Rohu, is a freshwater fish species native to South Asia. It's a popular and
+                    economically significant fish in the region. Rohu is commonly cultivated in aquaculture due to its
+                    fast growth, adaptability to various environments, and suitability for pond culture. The fish has a
+                    firm texture and is known for its culinary versatility. It's a key ingredient in many South Asian
+                    dishes and is appreciated for its taste and nutritional value. Rohu farming requires attention to
+                    water quality, proper feeding, and disease management for successful cultivation.
+
+
+                    {% elif fish_name == 'shrimp' %}
+                    Shrimp are small, marine or freshwater crustaceans with a delicate and sweet flavor. They are a
+                    popular seafood enjoyed worldwide in various cuisines. Shrimp farming, known as aquaculture, has
+                    become a significant industry to meet the global demand for shrimp. Farming practices include pond
+                    culture, tank systems, and sustainable methods like integrated multi-trophic aquaculture (IMTA).
+                    Shrimp farming faces challenges such as environmental impact, disease control, and ethical concerns,
+                    making it crucial for consumers to be mindful of the sourcing and sustainability of shrimp products.
+
+
+
+
+
+
+                    {% elif fish_name == 'silverCup' %}
+                    Introducing the SilverCup fish, a stunning aquatic marvel that captivates with its radiant silver
+                    scales and enchanting presence. This unique species boasts a name as striking as its appearance,
+                    making it a standout in the world of aquaculture.
+
+                    The SilverCup fish is more than just a visual delight; it's renowned for its adaptability and
+                    resilience. This makes it a top choice for both experienced aquarists and newcomers seeking a
+                    low-maintenance and captivating addition to their aquatic habitats.
+
+                    Stay tuned for the latest developments in SilverCup fish care and breeding, as enthusiasts and
+                    researchers dive deeper into the secrets of this extraordinary species. Explore the allure of the
+                    SilverCup, a name synonymous with elegance and charm in the realm of freshwater wonders.
+
+                    {% elif fish_name == 'sing' %}
+                    Meet the "Big Mouth Bass," a prime candidate for aquaculture farming. With rapid growth,
+                    adaptability, and a delicious taste, it's a promising choice for efficient and profitable
+                    operations. Plus, its popularity in sport fishing adds an extra dimension for potential revenue.
+                    Dive into Big Mouth Bass farming for a rewarding aquaculture
+                    {% elif fish_name == 'tilapia' %}
+                    Tilapia fish is a popular and versatile freshwater species widely used in aquaculture. Known for its
+                    mild taste and lean flesh, tilapia is a staple in many cuisines. It's a fast-growing fish, making it
+                    an attractive option for farming. Tilapia aquaculture offers benefits such as high yield,
+                    adaptability to various environments, and potential profitability. However, sustainable practices
+                    and proper management are crucial for ensuring the success of tilapia farming and minimizing
+                    environmental impact.
+                    {% endif %}
+                </ul>
+
+                {% if fish_name == 'karpio' %}
+                <img src="{{ url_for('static', filename='images/karpio.jpg') }}" alt="Karpio Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'katla' %}
+                <img src="{{ url_for('static', filename='images/katla.jpg') }}" alt="Katla Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'koi' %}
+                <img src="{{ url_for('static', filename='images/koi.jpg') }}" alt="Koi Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'magur' %}
+                <img src="{{ url_for('static', filename='images/magur.jpg') }}" alt="Magur Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'pangas' %}
+                <img src="{{ url_for('static', filename='images/pangas.jpg') }}" alt="Pangas Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'prawn' %}
+                <img src="{{ url_for('static', filename='images/prawn.jpg') }}" alt="Prawn Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'rui' %}
+                <img src="{{ url_for('static', filename='images/rui.jpg') }}" alt="Rui Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'shrimp' %}
+                <img src="{{ url_for('static', filename='images/shrimp.jpg') }}" alt="Shrimp Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'silverCup' %}
+                <img src="{{ url_for('static', filename='images/silverCup.jpg') }}" alt="SilverCup Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'sing' %}
+                <img src="{{ url_for('static', filename='images/sing.jpg') }}" alt="Sing Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% elif fish_name == 'tilapia' %}
+                <img src="{{ url_for('static', filename='images/tilapia.jpg') }}" alt="Tilapia Image" class="img-fluid mt-4" style="width: 50%; height: 50%;">
+                {% endif %}
+                
+                
+            </div>
+        </div>
+        
+                {% endif %}
+
+            </div>
+        </div>
+       
+        {% endif %}
+    </div>
+</body>
+
+<style>
+    body {
+        text-align: center;
+    }
+
+    button {
+        margin-top: 10px;
+    }
+</style>
+
+</html>
+
+{% endblock %}

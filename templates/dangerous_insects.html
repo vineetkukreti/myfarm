@@ -1,0 +1,217 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<!-- Navbar Start -->
+{% include 'navbar.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classifier</title>
+ </head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Image Classifier</h1>
+        
+        {% if not prediction %}
+            <form method="post" action="/predict_image" enctype="multipart/form-data" class="mt-4">
+                <div class="form-group">
+                    <input type="file" name="file" accept="image/*" required class="form-control-file">
+                </div>
+                <button type="submit" class="btn btn-primary">Predict</button>
+            </form>
+        {% else %}
+            <button onclick="location.href='/predict_image'" type="button" class="btn btn-primary mt-4">Classify Another</button>
+            <h2 class="mt-4">Prediction: {{ prediction }}</h2>
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h3 class="card-title">About the Disease</h3>
+                    {% if prediction == 'Africanized Honey Bees (Killer Bees)' %}
+                        <h1>Africanized Honey Bees (Killer Bees)</h1>
+                <p>
+                    Africanized Honey Bees, commonly known as Killer Bees, are a hybrid species that resulted from the interbreeding of African honey bees with European honey bees. They are known for their aggressive behavior and can be a threat to humans and animals.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Be Aware: Stay informed about the presence of Africanized Honey Bees in your area.</li>
+                    <li>Protective Clothing: Wear protective clothing, such as beekeeping suits, when working in areas with potential bee activity.</li>
+                    <li>Seal Entry Points: Seal any openings in buildings where bees could establish nests.</li>
+                </ul>
+            {% elif prediction == 'Aphids' %}
+                <h1>Aphids</h1>
+                <p>
+                    Aphids are small, sap-sucking insects that can infest a wide range of plants, causing damage to crops and ornamental plants.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Natural Predators: Encourage the presence of natural predators like ladybugs and lacewings.</li>
+                    <li>Pruning: Regularly prune infested plant parts to control aphid populations.</li>
+                    <li>Insecticidal Soap: Use insecticidal soap to control aphid infestations.</li>
+                </ul>
+            {% elif prediction == 'Armyworms' %}
+                <h1>Armyworms</h1>
+                <p>
+                    Armyworms are caterpillars that can devastate crops by consuming large portions of leaves, stems, and grains.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Early Detection: Monitor fields for signs of armyworm infestation, such as chewed leaves and droppings.</li>
+                    <li>Natural Enemies: Promote the presence of natural enemies like parasitic wasps.</li>
+                    <li>Crop Rotation: Practice crop rotation to disrupt the life cycle of armyworms.</li>
+                </ul>
+            {% elif prediction == 'Brown Marmorated Stink Bugs' %}
+                <h1>Brown Marmorated Stink Bugs</h1>
+                <p>
+                    Brown Marmorated Stink Bugs are agricultural pests that feed on a variety of crops, causing damage to fruits and vegetables.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Sealing Entry Points: Seal cracks and crevices in buildings to prevent stink bugs from entering.</li>
+                    <li>Trap Crops: Plant trap crops to attract and control stink bug populations.</li>
+                    <li>Insecticides: Use insecticides as a last resort, following recommended guidelines.</li>
+                </ul>
+            {% elif prediction == 'Cabbage Loopers' %}
+                <h1>Cabbage Loopers</h1>
+                <p>
+                    Cabbage Loopers are caterpillars that feed on cabbage and other cruciferous vegetables, causing damage to the leaves.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Handpicking: Remove loopers by hand from affected plants.</li>
+                    <li>Bacillus thuringiensis (Bt): Use Bt, a natural insecticide, to control cabbage looper infestations.</li>
+                    <li>Row Covers: Use row covers to protect plants from adult cabbage looper moths.</li>
+                </ul>
+            {% elif prediction == 'Citrus Canker' %}
+                <h1>Citrus Canker</h1>
+                <p>
+                    Citrus Canker is a bacterial disease that affects citrus trees, causing lesions on leaves, fruit, and stems.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Quarantine Measures: Implement quarantine measures to prevent the spread of citrus canker to unaffected areas.</li>
+                    <li>Pruning: Prune and destroy infected plant parts to reduce the spread of the disease.</li>
+                    <li>Copper Sprays: Use copper-based sprays as a preventive measure against citrus canker.</li>
+                </ul>
+            {% elif prediction == 'Colorado Potato Beetles' %}
+                <h1>Colorado Potato Beetles</h1>
+                <p>
+                    Colorado Potato Beetles are destructive pests that feed on potato plants, causing significant damage to foliage.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Rotate Crops: Practice crop rotation to reduce the likelihood of Colorado Potato Beetle infestations.</li>
+                    <li>Early Planting: Plant potatoes early in the season to avoid peak beetle activity.</li>
+                    <li>Insecticides: Use insecticides when necessary, following recommended guidelines.</li>
+                </ul>
+            {% elif prediction == 'Corn Borers' %}
+                <h1>Corn Borers</h1>
+                <p>
+                    Corn Borers are moth larvae that infest corn plants, causing damage to stems, leaves, and ears.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Genetically Modified Varieties: Plant genetically modified corn varieties that are resistant to corn borer infestations.</li>
+                    <li>Trap Crops: Use trap crops to attract and control corn borer populations.</li>
+                    <li>Timely Harvest: Harvest corn at the appropriate time to reduce the risk of infestation.</li>
+                </ul>
+            {% elif prediction == 'Corn Earworms' %}
+                <h1>Corn Earworms</h1>
+                <p>
+                    Corn Earworms are caterpillars that feed on the ears of corn plants, causing damage to the kernels.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Bt Corn: Plant corn varieties containing Bacillus thuringiensis (Bt) for resistance against corn earworms.</li>
+                    <li>Biological Controls: Introduce natural enemies, such as parasitic wasps, to control corn earworm populations.</li>
+                    <li>Monitor with Pheromone Traps: Use pheromone traps to monitor corn earworm activity and implement control measures accordingly.</li>
+                </ul>
+            {% elif prediction == 'Fall Armyworms' %}
+                <h1>Fall Armyworms</h1>
+                <p>
+                    Fall Armyworms are destructive pests that target a variety of crops, causing extensive damage to leaves and stems.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Early Detection: Monitor fields for signs of fall armyworm infestation, such as feeding damage and egg masses.</li>
+                    <li>Natural Enemies: Promote the presence of natural enemies like parasitoid wasps and predators to control fall armyworm populations.</li>
+                    <li>Chemical Control: Use insecticides as a last resort, following recommended guidelines and considering the impact on beneficial insects.</li>
+                </ul>
+            {% elif prediction == 'Fruit Flies' %}
+                <h1>Fruit Flies</h1>
+                <p>
+                    Fruit Flies are common pests that infest and damage a variety of fruits, leading to economic losses in agriculture.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Sanitation Practices: Keep orchards and fruit-growing areas clean to reduce breeding sites for fruit flies.</li>
+                    <li>Traps: Use traps with attractants to monitor and control fruit fly populations.</li>
+                    <li>Cultural Practices: Implement cultural practices, such as proper pruning and harvesting, to minimize fruit fly infestations.</li>
+                </ul>
+            {% elif prediction == 'Spider Mites' %}
+                <h1>Spider Mites</h1>
+                <p>
+                    Spider Mites are tiny arachnids that feed on plant sap, causing stippling, yellowing, and eventual damage to leaves.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Water Management: Maintain proper watering practices to reduce conditions favorable for spider mite infestations.</li>
+                    <li>Natural Predators: Introduce natural predators like predatory mites to control spider mite populations.</li>
+                    <li>Insecticidal Soap: Use insecticidal soap as a non-toxic option for controlling spider mites.</li>
+                </ul>
+            {% elif prediction == 'Thrips' %}
+                <h1>Thrips</h1>
+                <p>
+                    Thrips are small, slender insects that feed on plant sap, causing damage to leaves, flowers, and fruits.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Reflective Mulches: Use reflective mulches to deter thrips from landing on plants.</li>
+                    <li>Biological Control: Introduce natural enemies, such as predatory mites and parasitoid wasps, to control thrip populations.</li>
+                    <li>Insecticidal Soap: Use insecticidal soap as a control measure for thrips, following recommended guidelines.</li>
+                </ul>
+            {% elif prediction == 'Tomato Hornworms' %}
+                <h1>Tomato Hornworms</h1>
+                <p>
+                    Tomato Hornworms are large caterpillars that feed on tomato plants, causing defoliation and damage to fruits.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Handpicking: Remove hornworms by hand from affected tomato plants.</li>
+                    <li>Natural Enemies: Encourage natural enemies like parasitic wasps and predators to control tomato hornworm populations.</li>
+                    <li>Beneficial Plants: Plant companion plants that attract beneficial insects, helping to keep hornworm populations in check.</li>
+                </ul>
+            {% elif prediction == 'Western Corn Rootworms' %}
+                <h1>Western Corn Rootworms</h1>
+                <p>
+                    Western Corn Rootworms are beetles that can damage corn crops by feeding on roots, affecting plant health and yield.
+                </p>
+                <h4>Prevention:</h4>
+                <ul>
+                    <li>Rotate Crops: Practice crop rotation to break the life cycle of Western Corn Rootworms and reduce their impact on corn fields.</li>
+                    <li>Early Planting: Plant corn early to avoid peak activity of adult rootworm beetles.</li>
+                    <li>Insecticidal Treatments: Consider targeted insecticidal treatments when economic thresholds are reached, based on monitoring efforts.</li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        <img src="{{ img_path }}" alt="Uploaded Image" class="img-fluid mt-4">
+    {% endif %}
+</div>
+</body>
+
+<style>
+body {
+    text-align: center;
+   
+}
+
+button {
+    margin-top: 10px;
+}
+</style>
+
+</html>
+
+{% endblock %}
